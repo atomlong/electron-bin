@@ -1,10 +1,10 @@
 pkgbase = electron-bin
 	pkgdesc = Meta package, always depends on the latest stable Electron binary build
-	pkgver = 29
+	pkgver = 30
 	pkgrel = 1
 	url = https://electronjs.org
 	arch = any
 	license = MIT
-	depends = electron29-bin
+	depends = electron30-bin
 
 pkgname = electron-bin
