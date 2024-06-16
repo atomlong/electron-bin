@@ -1,19 +1,26 @@
 # Maintainer: Yurii Kolesnykov <root@yurikoles.com>
 
 # Based on extra/electron by
-# Bruno Pagani <archange@archlinux.org>
 # Caleb Maclennan <caleb@alerque.com>
+# Bruno Pagani <archange@archlinux.org>
 
-pkgver=30
+pkgver=31
 pkgrel=1
-pkgname=electron-bin
-pkgdesc='Meta package, always depends on the latest stable Electron binary build'
+_pkgname=electron
+pkgname="${_pkgname}-bin"
+pkgdesc='Meta package providing the latest available stable Electron build'
+pkgdesc+=' — binary'
 arch=(any)
 url='https://electronjs.org'
 license=(MIT)
-depends=("electron${pkgver}-bin")
+provides=("${_pkgname}=${pkgver}")
+conflicts=("${_pkgname}")
 
 package() {
-	mkdir -p "${pkgdir}/usr/bin"
-	ln -sf "electron${pkgver}" "${pkgdir}/usr/bin/${pkgname}"
+	depends=("electron${pkgver}-bin")
+	mkdir -p "${pkgdir}/usr/bin" "${pkgdir}/usr/lib"
+
+	local _electron_major="electron${pkgver}"
+	ln -sf "${_electron_major}" "${pkgdir}/usr/bin/${pkgname}"
+	ln -sf "${_electron_major}" "${pkgdir}/usr/lib/${pkgname}"
 }
